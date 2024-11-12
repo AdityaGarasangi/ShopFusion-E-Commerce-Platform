@@ -64,26 +64,66 @@ ShopFusion is a modern e-commerce platform built with Django, providing a seamle
    Open your browser and go to ```http://127.0.0.1:8000/user/register``` to view the website.
 
 
+## Key Features and Pages
+
+1. **Homepage**
+   * Displays the list of products available in the store.
+   * Provides an easy-to-navigate interface for users to explore items.
+   (images/Home.png)
 
 
+2. **Product Details**
+   * Shows detailed information about a selected product.
+   * Users can add the product to their cart and proceed to checkout.
+     (images/Details.png)
 
 
+3. **Shopping Cart and Checkout**
+   * Users can review the products in their cart, modify quantities, and proceed to the checkout page.
+   * The checkout form collects personal details like name, email, and address.
+     (images/Cart.png)
+     (images/Order.png)
 
 
+4. **User Authentication Pages**
+   * **Login**: Allows users to log in to their accounts.
+     (images/Login.html)
+     
+   * **Register**: New users can register for an account.
+     (images/Register.html)
+     
+   * **Logout**: Logs out the user from the system.
+     (images/Logout.html)
+     
+   * **Profile**: Users can view and edit their profile information.
+     (images/Profile.html)
 
 
+5. **Seller Dashboard**
+   * Sellers can manage their products, view their sales statistics, and access their profile page.
+   * Sellers can create, edit, and delete products on this page.
+     (images/Dashboard.png)
 
 
+6. **Sales Stats**
+   * Sellers can view detailed statistics about their sales, including revenue and order history.
+     (images/Stats.png)
 
 
+7. **Product Management Pages**
+   * **Create Products** Sellers can add new products to the platform.
+     (images/Create.png)
+
+   * **Edit/Remove Products** Sellers can modify/remove existing product details.
+   * (images/Edit.png)
+  
+
+8. **Seller Page**
+   * Allows sellers to manage their profile and product listings.
+     (images/Seller.png)
 
 
-
-
-
-
-
-
-
-
-   
+## Future Enhancements
+   * **Payment Gateway Integration**: Integrate payment gateways like Stripe or PayPal for order payments.
+   * **Product Reviews**: Allow customers to leave reviews and ratings on products.
+   * **Order History**: Let users view their past orders and statuses.
