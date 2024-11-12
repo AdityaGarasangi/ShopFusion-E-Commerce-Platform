@@ -1,0 +1,58 @@
+{% extends 'shop_app/baseTemp.html' %}
+
+{% block content %}
+  <div class="container mx-auto px-4 py-10">
+    <!-- Dashboard Header -->
+    <div class="flex justify-between items-center mb-8">
+      <div class="text-3xl font-semibold text-gray-800">My Products</div>
+
+      <div class="flex space-x-4">
+        <!-- New Product Button -->
+        <a href="{% url 'createproduct' %}" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg font-semibold hover:bg-green-700 transition duration-300 transform hover:scale-105">New Product</a>
+
+        <!-- Check Stats Button -->
+        <a href="{% url 'sales' %}" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg font-semibold hover:bg-green-700 transition duration-300 transform hover:scale-105">Check Stats</a>
+      </div>
+    </div>
+
+    <!-- Check if Products Exist -->
+    {% if products %}
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Loop through products -->
+        {% for product in products %}
+          <div class="flex flex-col shadow-xl rounded-lg overflow-hidden bg-white hover:shadow-2xl transition duration-300">
+            <img class="w-full h-56 object-cover" src="{{ product.image.url }}" alt="{{ product.name }}" />
+            <div class="p-6">
+              <div class="font-semibold text-xl text-gray-800">{{ product.name }}</div>
+              <div class="text-green-500 text-sm font-medium">${{ product.price }}</div>
+              <div class="mt-2">
+                <a href="{% url 'edit' product.id %}" class="text-blue-600 hover:text-blue-800 transition duration-200">Edit Product</a>
+              </div>
+            </div>
+            <!-- Earnings Section -->
+            <div class="bg-gray-100 p-4 flex justify-between items-center">
+              <div class="text-xs text-gray-600">Total Earnings</div>
+              <div class="text-lg text-green-600 font-semibold">${{ product.total_sales_amount }}</div>
+            </div>
+            <!-- Orders Section -->
+            <div class="bg-gray-100 p-4 flex justify-between items-center">
+              <div class="text-xs text-gray-600">Total Orders</div>
+              <div class="text-lg">{{ product.total_sales }}</div>
+            </div>
+            <!-- Rating Section -->
+            <div class="bg-gray-100 p-4 flex justify-between items-center">
+              <div class="text-xs text-gray-600">Rating</div>
+              <div class="text-lg text-yellow-500">4.8</div> <!-- Placeholder rating -->
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="mt-8 text-center text-lg font-semibold text-gray-500">
+        <p>
+          You don't have any products yet. <a href="{% url 'createproduct' %}" class="text-blue-500 hover:underline">Create a new product.</a>
+        </p>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

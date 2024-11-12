@@ -1,0 +1,124 @@
+{% extends 'shop_app/baseTemp.html' %}
+{% load static %}
+{% block title %}
+  CheckOut
+{% endblock %}
+{% block content %}
+  <div class="container mx-auto px-4 py-8">
+    <!-- Shopping Cart Section -->
+    <div class="w-full">
+      <ul class="bg-white shadow-md rounded-lg p-6 mb-8" id="item_list">
+        <h1 class="text-3xl font-semibold text-black mb-4">Shopping Cart</h1>
+        <br />
+      </ul>
+      <!-- Clear Cart Button -->
+      <div class="flex justify-end">
+        <button type="button" id="clearCart" class="w-auto py-3 px-6 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-200">Clear Cart</button>
+      </div>
+    </div>
+
+    <!-- Order Details Form -->
+    <div class="w-full">
+      <form method="POST" class="bg-white shadow-md rounded-lg p-6 space-y-6">
+        {% csrf_token %}
+        <h1 class="text-3xl font-semibold text-black">Order Details</h1>
+        <input type="hidden" id="items" name="items" />
+
+        <!-- Name Field -->
+        <div>
+          <label for="name" class="block text-lg font-medium text-black">Name</label>
+          <input id="name" name="name" type="text" placeholder="John" class="mt-1 block border-2 w-1/2 p-3 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
+        </div>
+
+        <!-- Email Field -->
+        <div>
+          <label for="email" class="block text-lg font-medium text-black">Email</label>
+          <input id="email" name="email" type="email" placeholder="john@gmail.com" class="mt-1 border-2 block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring p-3 focus:ring-blue-200 focus:ring-opacity-50" />
+        </div>
+
+        <!-- Address Field -->
+        <div>
+          <label for="address" class="block text-lg font-medium text-black">Address</label>
+          <input id="address" name="address" type="text" placeholder="1234 Main St" class="mt-1 border-2 block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring p-3 focus:ring-blue-200 focus:ring-opacity-50" />
+        </div>
+
+        <!-- City Field -->
+        <div>
+          <label for="city" class="block text-lg font-medium text-black">City</label>
+          <input id="city" name="city" type="text" class="mt-1 border-2 block w-1/2 rounded-md border-gray-300 p-3 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
+        </div>
+
+        <!-- State Field -->
+        <div>
+          <label for="state" class="block text-lg font-medium text-black">State</label>
+          <input id="state" name="state" type="text" class="mt-1 border-2 block w-1/2 rounded-md border-gray-300 p-3 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
+        </div>
+
+        <!-- Zip Code Field -->
+        <div>
+          <label for="zipcode" class="block text-lg font-medium text-black">Zip</label>
+          <input id="zipcode" name="zipcode" type="text" class="mt-1 border-2 block w-1/2 rounded-md border-gray-300 p-3 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
+        </div>
+
+        <!-- Amount to be Paid Field -->
+        <div>
+          <label for="total" class="block text-lg font-medium text-black">Amount to be paid</label>
+          <input readonly type="text" id="total" name="total" class="mt-1 border-2 block w-1/2 rounded-md border-gray-300 p-3 bg-gray-100 shadow-sm" />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-start">
+          <button type="submit" class="w-auto py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200">Place Order</button>
+        </div>
+      </form>
+
+      <!-- Continue Shopping -->
+      <div class="mt-6 flex justify-center">
+        <a class="block text-center w-full text-xl rounded-full px-6 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-bold" href="{% url 'home' %}">Continue Shopping</a>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {}
+      let total = 0
+      let totalQuantity = 0
+      
+      for (let item in cart) {
+        let name = cart[item][1]
+        let quantity = cart[item][0]
+        let price = cart[item][2]
+        total += price * quantity
+        totalQuantity += quantity
+      
+        let itemString = `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <li class="flex justify-between items-center py-3 border-b border-gray-300">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <h5 class="text-lg font-semibold text-black">${name}</h5>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <span class="text-gray-600">Quantity: ${quantity}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <span class="text-lg font-semibold text-yellow-500">₹ ${price.toLocaleString('en-US')}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </li>`
+        document.getElementById('item_list').insertAdjacentHTML('beforeend', itemString)
+      }
+      
+      let formattedTotal = total.toLocaleString('en-US')
+      let totalPrice = `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <li class="flex justify-between items-center py-3 mt-4 border-t border-gray-300">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <h3 class="text-2xl font-bold text-black">Subtotal (${totalQuantity} items)</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <span class="text-2xl font-bold text-green-600">₹ ${formattedTotal}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </li>`
+      
+      document.getElementById('total').value = formattedTotal
+      document.getElementById('item_list').insertAdjacentHTML('beforeend', totalPrice)
+      document.getElementById('items').value = JSON.stringify(cart)
+      
+      // Clear Cart functionality
+      document.getElementById('clearCart').addEventListener('click', function () {
+        localStorage.removeItem('cart') // Removes the cart from localStorage
+        document.getElementById('item_list').innerHTML = '' // Clears the cart display
+        document.getElementById('total').value = '₹ 0' // Resets the total
+        window.location.href = "{% url 'checkout' %}"
+      })
+    </script>
+  </div>
+{% endblock %}

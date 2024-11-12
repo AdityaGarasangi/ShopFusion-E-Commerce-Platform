@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind Link -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'shop_app/style/output.css' %}" />
+    <!-- Tailwind Link -->
+    <title>
+      {% block title %}
+        ShopFusion
+      {% endblock %}
+    </title>
+  </head>
+  <body class="bg-white text-black">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md">
+      <div class="max-w-screen-3xl flex justify-between items-center py-4 px-6">
+        <!-- Logo and Tagline -->
+        <a class="flex items-center space-x-3 ml-20" href="{% url 'home' %}">
+          <img class="h-10" src="{% static 'shop_app/images/logo.png' %}" alt="ShopFusion Logo" />
+          <div class="flex flex-col">
+            <span class="text-2xl font-bold text-black">ShopFusion</span>
+            <span class="text-sm text-black">Shop Smart, Shop Fusion</span>
+          </div>
+        </a>
+
+        <!-- Navbar Links and User Info -->
+        <div class="flex items-center space-x-6 mr-10">
+          <!-- Cart Link -->
+          <a href="{% url 'checkout' %}" class="flex font-bold items-center text-xl text-black hover:text-gray-700">
+            <img class="h-8" src="{% static 'shop_app/images/cart.png' %}" alt="Cart" />
+            <span id="cart" class="ml-2">Cart (0)</span>
+          </a>
+
+          <!-- Become a Seller Link -->
+          <a href="{% url 'seller' %}" class="text-xl font-bold text-black hover:text-gray-700">Become a Seller</a>
+
+          <!-- User Profile or Login -->
+          <div class="flex items-center font-bold space-x-4">
+            {% if request.user.is_authenticated %}
+              <a href="{% url 'profile' %}" class="flex items-center text-xl text-black hover:text-gray-700">
+                <img class="h-10 w-10 rounded-full" src="{% static 'shop_app/images/default-pfp.jpg' %}" alt="Profile Picture" />
+                <span class="ml-2">{{ request.user.username }}</span>
+              </a>
+            {% else %}
+              <a href="{% url 'login' %}" class="text-xl font-bold text-black hover:text-gray-700">Login</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content Block -->
+    <div class="container mx-auto py-8">
+      {% block content %}
+
+      {% endblock %}
+    </div>
+
+    <!-- JavaScript to Handle Cart Functionality -->
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function () {
+        // Initialize the cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || {}
+      
+        // Function to update Cart Display
+        function updateCartDisplay() {
+          const cartCount = Object.keys(cart).length // Get the number of items in the cart
+          document.getElementById('cart').innerHTML = 'Cart (' + cartCount + ')' // Update cart display
+        }
+      
+        // Initialize Cart Display on page load
+        updateCartDisplay()
+      
+        // Event listener for "Add to Cart" buttons
+        document.querySelectorAll('.add-to-cart').forEach(function (button) {
+          button.addEventListener('click', function () {
+            let itemId = this.id.toString() // Get the ID of the clicked product
+      
+            // Get product price and name
+            const price = parseFloat(document.getElementById('price' + itemId).textContent.replace(/[^\d.-]/g, ''))
+            const name = document.getElementById('nm' + itemId).textContent
+      
+            // Update cart quantity and price
+            if (cart[itemId] != undefined) {
+              const quantity = cart[itemId][0] + 1 // Increment quantity
+              cart[itemId][0] = quantity // Update quantity
+              cart[itemId][2] = cart[itemId][2] + price // Update total price
+            } else {
+              cart[itemId] = [1, name, price] // Add new product to cart
+            }
+      
+            // Log updated cart to console for debugging
+            console.log(cart)
+      
+            // Save updated cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart))
+      
+            // Update Cart Display after adding an item
+            updateCartDisplay()
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

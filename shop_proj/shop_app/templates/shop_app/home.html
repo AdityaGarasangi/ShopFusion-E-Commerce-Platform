@@ -1,0 +1,29 @@
+{% extends 'shop_app/baseTemp.html' %}
+{% load static %}
+
+{% block title %}
+  ShopFusion
+{% endblock %}
+
+{% block content %}
+  <div class="product-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-6">
+    {% for product in products %}
+      <div class="product bg-white shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
+        <!-- Product Image -->
+        <div class="product-image">
+          <a href="{% url 'detail' product.id %}"><img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-[350px] object-cover rounded-t-lg" /></a>
+        </div>
+
+        <!-- Product Info -->
+        <div class="p-4">
+          <h3 id="nm{{ product.id }}" class="text-xl font-semibold text-gray-700 truncate">{{ product.name }}</h3>
+          <p class="text-sm font-semibold text-gray-600 mt-2 mb-4 line-clamp-2">{{ product.description }}</p>
+          <div class="flex justify-between items-center">
+            <span id="price{{ product.id }}" class="text-xl font-bold text-green-600">₹ {{ product.price }}</span>
+            <button id="{{ product.id }}" class="add-to-cart bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-200">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

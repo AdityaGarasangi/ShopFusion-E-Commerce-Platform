@@ -1,0 +1,54 @@
+{% extends 'shop_app/baseTemp.html' %}
+{% load static %}
+
+{% block title %}
+  Profile
+{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto p-10">
+    <!-- Username -->
+    <h1 class="text-5xl font-bold text-center text-white mb-6">{{ request.user.username }}</h1>
+
+    <!-- Profile Image -->
+    <div class="flex justify-center mb-10">
+      <img src="media/media/user_uploads/default-pfp.jpg" alt="Profile Picture" class="h-40 w-40 rounded-full border-4 border-blue-500 shadow-lg" />
+    </div>
+
+    <!-- User Information -->
+    <div class="bg-gray-400 p-8 rounded-lg shadow-lg">
+      <h2 class="text-3xl font-bold text-black mb-4">User Information</h2>
+      <div class="flex flex-col space-y-3">
+        <div>
+          <span class="text-black font-semibold">Username:</span>
+          <span class="text-black text-lg font-bold">{{ request.user.username }}</span>
+        </div>
+        <div>
+          <span class="text-black font-semibold">First Name:</span>
+          <span class="text-black text-lg font-bold">{{ request.user.first_name }}</span>
+        </div>
+        <div>
+          <span class="text-black font-semibold">Last Name:</span>
+          <span class="text-black text-lg font-bold">{{ request.user.last_name }}</span>
+        </div>
+        <div>
+          <span class="text-black font-semibold">Email:</span>
+          <span class="text-black text-lg font-bold">{{ request.user.email }}</span>
+        </div>
+        <div>
+          <span class="text-black font-semibold">Joined:</span>
+          <span class="text-black text-lg font-bold">{{ request.user.date_joined|date:'F j, Y' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions Section -->
+    <div class="mt-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">Manage Your Account</h2>
+      <div class="flex justify-center space-x-4">
+        <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-lg font-semibold transition duration-200">Edit Profile</a>
+        <a href="{% url 'logout' %}" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg text-lg font-bold transition duration-200">Logout</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

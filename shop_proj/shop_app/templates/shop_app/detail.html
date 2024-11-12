@@ -1,0 +1,81 @@
+{% extends 'shop_app/baseTemp.html' %}
+{% load static %}
+
+{% block title %}
+  ShopFusion - Product Details
+{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto p-8">
+    <div class="flex flex-col md:flex-row items-center justify-center gap-10">
+      <!-- Product Image -->
+      <div class="w-auto">
+        <img class="rounded-lg shadow-xl w-auto object-cover" src="{{ details.image.url }}" alt="{{ details.name }}" />
+      </div>
+
+      <!-- Product Info -->
+      <div class="w-full md:w-1/2 flex flex-col justify-start space-y-6">
+        <h1 class="text-4xl font-bold text-gray-900">{{ details.name }}</h1>
+        <p class="text-lg text-gray-600">{{ details.description }}</p>
+
+        <p class="text-3xl font-bold text-green-600">₹ {{ details.price }}</p>
+
+        <!-- Add to Cart Button -->
+        <div class="mt-6">
+          <button type="submit" id="{{ product.id }}" class="bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-semibold shadow-md hover:bg-green-700 focus:outline-none transition duration-300 ease-in-out transform hover:scale-105">Add to Cart</button>
+        </div>
+
+        <!-- Continue Shopping -->
+        <div class="mt-6 flex justify-start">
+          <a class="bg-yellow-600 text-white px-8 py-4 rounded-lg text-xl font-semibold shadow-md hover:bg-yellow-700 focus:outline-none transition duration-300 ease-in-out transform hover:scale-105" href="{% url 'home' %}">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript to Handle Cart Functionality -->
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize the cart from localStorage
+      let cart = JSON.parse(localStorage.getItem('cart')) || {}
+    
+      // Function to update Cart Display
+      function updateCartDisplay() {
+        const cartCount = Object.keys(cart).length // Get the number of items in the cart
+        document.getElementById('cart').innerHTML = 'Cart (' + cartCount + ')' // Update cart display
+      }
+    
+      // Initialize Cart Display on page load
+      updateCartDisplay()
+    
+      // Event listener for "Add to Cart" buttons
+      document.querySelectorAll('.add-to-cart').forEach(function (button) {
+        button.addEventListener('click', function () {
+          let itemId = this.id.toString() // Get the ID of the clicked product
+    
+          // Get product price and name
+          const price = parseFloat(document.getElementById('price' + itemId).textContent.replace(/[^\d.-]/g, ''))
+          const name = document.getElementById('nm' + itemId).textContent
+    
+          // Update cart quantity and price
+          if (cart[itemId] != undefined) {
+            const quantity = cart[itemId][0] + 1 // Increment quantity
+            cart[itemId][0] = quantity // Update quantity
+            cart[itemId][2] = cart[itemId][2] + price // Update total price
+          } else {
+            cart[itemId] = [1, name, price] // Add new product to cart
+          }
+    
+          // Log updated cart to console for debugging
+          console.log(cart)
+    
+          // Save updated cart to localStorage
+          localStorage.setItem('cart', JSON.stringify(cart))
+    
+          // Update Cart Display after adding an item
+          updateCartDisplay()
+        })
+      })
+    })
+  </script>
+{% endblock %}
