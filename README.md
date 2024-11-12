@@ -69,58 +69,58 @@ ShopFusion is a modern e-commerce platform built with Django, providing a seamle
 1. **Homepage**
    * Displays the list of products available in the store.
    * Provides an easy-to-navigate interface for users to explore items.
-   (images/Home.png)
+   ![Homepage](images/Home.png)
 
 
 2. **Product Details**
    * Shows detailed information about a selected product.
    * Users can add the product to their cart and proceed to checkout.
-     (images/Details.png)
+     ![Detailpage](images/Details.png)
 
 
 3. **Shopping Cart and Checkout**
    * Users can review the products in their cart, modify quantities, and proceed to the checkout page.
    * The checkout form collects personal details like name, email, and address.
-     (images/Cart.png)
-     (images/Order.png)
+     ![Cart](images/Cart.png)
+     ![Order](images/Order.png)
 
 
 4. **User Authentication Pages**
    * **Login**: Allows users to log in to their accounts.
-     (images/Login.html)
+     ![Login Page](images/Login.png)
      
    * **Register**: New users can register for an account.
-     (images/Register.html)
+     ![Register Page](images/Register.png)
      
    * **Logout**: Logs out the user from the system.
-     (images/Logout.html)
+     ![Logout Page](images/Logout.png)
      
    * **Profile**: Users can view and edit their profile information.
-     (images/Profile.html)
+     ![Profile Page](images/Profile.png)
 
 
 5. **Seller Dashboard**
    * Sellers can manage their products, view their sales statistics, and access their profile page.
    * Sellers can create, edit, and delete products on this page.
-     (images/Dashboard.png)
+     ![Dashboard](images/Dashboard.png)
 
 
 6. **Sales Stats**
    * Sellers can view detailed statistics about their sales, including revenue and order history.
-     (images/Stats.png)
+     ![Stats](images/Stats.png)
 
 
 7. **Product Management Pages**
    * **Create Products** Sellers can add new products to the platform.
-     (images/Create.png)
+     ![Create Page](images/Create.png)
 
    * **Edit/Remove Products** Sellers can modify/remove existing product details.
-   * (images/Edit.png)
+     ![Edit Page](images/Edit.png)
   
 
 8. **Seller Page**
    * Allows sellers to manage their profile and product listings.
-     (images/Seller.png)
+     ![Seller Page](images/Seller.png)
 
 
 ## Future Enhancements
