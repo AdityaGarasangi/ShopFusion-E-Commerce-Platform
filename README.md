@@ -14,7 +14,7 @@ ShopFusion is a modern e-commerce platform built with Django, providing a seamle
 ## Technologies Used
 
 - **Backend**: Django, Python
-- **Frontend**: HTML, CSS (Bootstrap v5.3), JavaScript
+- **Frontend**: HTML, TailwindCSS, JavaScript
 - **Database**: SQLite (default) or PostgreSQL (for production)
 - **Authentication**: Django's built-in authentication system
 - **Web Framework**: Django
