@@ -69,7 +69,7 @@ ShopFusion is a modern e-commerce platform built with Django, providing a seamle
 1. **Homepage**
    * Displays the list of products available in the store.
    * Provides an easy-to-navigate interface for users to explore items.
-   ![Homepage](images/Home.png)
+   ![Homepage](images/home.png)
 
 
 2. **Product Details**
