@@ -2,7 +2,7 @@
 
 ShopFusion is a modern e-commerce platform built with Django, providing a seamless shopping experience for users. The application allows customers to browse products, manage their carts, place orders, and manage their accounts. ShopFusion also features an intuitive dashboard for sellers to manage their products, track sales, and view statistics.
 
-## Features
+## Features:
 
 - **User Authentication**: User registration, login, and logout functionality.
 - **Product Management**: Sellers can create, edit, and delete products.
